@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/buildsmart-iam/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/finance/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/notification-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/project-manager/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/resource-allocation/resource-allocation/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/safety-service/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/siteops/BuildSmart-Final/BuildSmart-Mono-main/BuildSmart/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/vendor-contract-management-master/src/main/java" charset="UTF-8" />
+  </component>
+</project>

@@ -1,0 +1,129 @@
+server:
+  port: 8085
+  servlet:
+    context-path: /api
+
+spring:
+  application:
+    name: notification-service
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/notification_db?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC
+    username: ${DB_USER:root}
+    password: ${DB_PASS:RootPass}
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 20
+      minimum-idle: 5
+      connection-timeout: 30000
+
+  jpa:
+    hibernate:
+      ddl-auto: update          # use 'validate' in production with Flyway/Liquibase
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 30
+        order_inserts: true
+
+# ----------------------------------------------------------------------
+# JWT
+# ----------------------------------------------------------------------
+app:
+  jwt:
+    # Use a shared secret across services or rotate via JWKS endpoint in prod.
+    secret: ${JWT_SECRET:ZmFrZS1zZWNyZXQta2V5LWZvci1ub3RpZmljYXRpb24tc2VydmljZS1tdXN0LWJlLTI1Ni1iaXRz}
+    issuer: ${JWT_ISSUER:auth-service}
+
+# ----------------------------------------------------------------------
+# Resilience4j — strong fallback configuration
+# ----------------------------------------------------------------------
+resilience4j:
+  circuitbreaker:
+    configs:
+      default:
+        registerHealthIndicator: true
+        slidingWindowType: COUNT_BASED
+        slidingWindowSize: 20            # last 20 calls evaluated
+        minimumNumberOfCalls: 10         # need >=10 calls before evaluating
+        failureRateThreshold: 50         # >=50% failures opens the circuit
+        slowCallRateThreshold: 60        # >=60% slow calls opens the circuit
+        slowCallDurationThreshold: 2s    # call >2s = slow
+        permittedNumberOfCallsInHalfOpenState: 5
+        waitDurationInOpenState: 10s     # stay OPEN 10s, then HALF_OPEN
+        automaticTransitionFromOpenToHalfOpenEnabled: true
+        recordExceptions:
+          - org.springframework.dao.DataAccessException
+          - java.sql.SQLException
+          - java.util.concurrent.TimeoutException
+          - org.springframework.web.client.RestClientException
+          - feign.FeignException
+        ignoreExceptions:
+          - com.company.notification.exception.AccessDeniedException
+          - com.company.notification.exception.ResourceNotFoundException
+    instances:
+      notificationDb:
+        baseConfig: default
+      notificationCreate:
+        baseConfig: default
+        failureRateThreshold: 40         # writes are stricter
+
+  retry:
+    configs:
+      default:
+        maxAttempts: 3
+        waitDuration: 500ms
+        enableExponentialBackoff: true
+        exponentialBackoffMultiplier: 2
+        retryExceptions:
+          - org.springframework.dao.TransientDataAccessException
+          - java.sql.SQLTransientException
+        ignoreExceptions:
+          - com.company.notification.exception.AccessDeniedException
+    instances:
+      notificationDb:
+        baseConfig: default
+      notificationCreate:
+        baseConfig: default
+        maxAttempts: 2
+
+  bulkhead:
+    instances:
+      notificationDb:
+        maxConcurrentCalls: 50
+        maxWaitDuration: 100ms
+
+  timelimiter:
+    configs:
+      default:
+        timeoutDuration: 3s
+        cancelRunningFuture: true
+    instances:
+      notificationDb:
+        baseConfig: default
+
+# ----------------------------------------------------------------------
+# Actuator — circuit breaker health visible at /actuator/health
+# ----------------------------------------------------------------------
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, circuitbreakers, circuitbreakerevents, retries, bulkheads
+  endpoint:
+    health:
+      show-details: always
+  health:
+    circuitbreakers:
+      enabled: true
+    diskspace:
+      enabled: true
+
+logging:
+  level:
+    com.company.notification: INFO
+    io.github.resilience4j: INFO
+    org.hibernate.SQL: WARN

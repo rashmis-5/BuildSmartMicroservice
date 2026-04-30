@@ -1,0 +1,179 @@
+2026-04-30T17:30:32.884+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] c.buildsmart.finance.FinanceApplication  : Starting FinanceApplication using Java 21.0.2 with PID 28232 (C:\Users\2479797\Desktop\BuildSmartMicroservices\finance\target\classes started by 2479797 in C:\Users\2479797\Desktop\BuildSmartMicroservices)
+2026-04-30T17:30:32.891+05:30 DEBUG 28232 --- [finance-service] [restartedMain] [                                                 ] c.buildsmart.finance.FinanceApplication  : Running with Spring Boot v4.0.5, Spring v7.0.6
+2026-04-30T17:30:32.893+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] c.buildsmart.finance.FinanceApplication  : No active profile set, falling back to 1 default profile: "default"
+2026-04-30T17:30:33.003+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2026-04-30T17:30:33.003+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2026-04-30T17:30:35.476+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2026-04-30T17:30:35.811+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 317 ms. Found 4 JPA repository interfaces.
+2026-04-30T17:30:37.084+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.cloud.context.scope.GenericScope     : BeanFactory id=4d8f0fcf-add0-3244-91ca-cf47cb0ff8a5
+2026-04-30T17:30:38.904+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8085 (http)
+2026-04-30T17:30:38.931+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2026-04-30T17:30:38.931+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.20]
+2026-04-30T17:30:39.022+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 6018 ms
+2026-04-30T17:30:40.660+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.c.openfeign.FeignClientFactoryBean   : For 'iam-service' URL not provided. Will try picking an instance via load-balancing.
+2026-04-30T17:30:41.000+05:30 DEBUG 28232 --- [finance-service] [restartedMain] [                                                 ] c.b.f.security.JwtAuthenticationFilter   : Filter 'jwtAuthenticationFilter' configured for use
+2026-04-30T17:30:42.788+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2026-04-30T17:30:42.846+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2026-04-30T17:30:43.554+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection com.mysql.cj.jdbc.ConnectionImpl@78d34cab
+2026-04-30T17:30:43.557+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2026-04-30T17:30:43.651+05:30  WARN 28232 --- [finance-service] [restartedMain] [                                                 ] org.hibernate.orm.deprecation            : HHH90000025: MySQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2026-04-30T17:30:45.215+05:30 DEBUG 28232 --- [finance-service] [restartedMain] [                                                 ] org.hibernate.SQL                        : 
+    create table assigned_tasks (
+        id varchar(20) not null,
+        assigned_by varchar(50) not null,
+        assigned_to varchar(50) not null,
+        completed_at datetime(6),
+        description varchar(1000) not null,
+        linked_entity_id varchar(20),
+        pm_notification_id varchar(50) not null,
+        pm_task_id varchar(50) not null,
+        project_id varchar(20) not null,
+        status enum ('COMPLETED','PENDING') not null,
+        synced_at datetime(6) not null,
+        primary key (id)
+    ) engine=InnoDB
+2026-04-30T17:30:45.255+05:30 DEBUG 28232 --- [finance-service] [restartedMain] [                                                 ] org.hibernate.SQL                        : 
+    create table budgets (
+        budget_id varchar(20) not null,
+        actual_amount decimal(38,2),
+        approved_at datetime(6),
+        approved_by varchar(100),
+        budget_category enum ('EQUIPMENT','LABOR','MATERIAL','MISCELLANEOUS','SUBCONTRACT') not null,
+        created_at datetime(6) not null,
+        created_by varchar(100) not null,
+        is_deleted bit,
+        planned_amount decimal(38,2) not null,
+        project_id varchar(20) not null,
+        status enum ('APPROVED','DRAFT','REJECTED') not null,
+        updated_at datetime(6),
+        variance decimal(38,2),
+        primary key (budget_id)
+    ) engine=InnoDB
+2026-04-30T17:30:45.278+05:30 DEBUG 28232 --- [finance-service] [restartedMain] [                                                 ] org.hibernate.SQL                        : 
+    create table expenses (
+        expense_id varchar(20) not null,
+        amount decimal(38,2) not null,
+        approved_at datetime(6),
+        approved_by varchar(100),
+        budget_id varchar(20) not null,
+        created_at datetime(6) not null,
+        created_by varchar(100) not null,
+        description TEXT,
+        expense_date datetime(6) not null,
+        expense_type varchar(100) not null,
+        is_deleted bit,
+        project_id varchar(20) not null,
+        rejection_reason TEXT,
+        status enum ('APPROVED','DRAFT','REJECTED','REVISION_REQUIRED','SUBMITTED') not null,
+        updated_at datetime(6),
+        primary key (expense_id)
+    ) engine=InnoDB
+2026-04-30T17:30:45.305+05:30 DEBUG 28232 --- [finance-service] [restartedMain] [                                                 ] org.hibernate.SQL                        : 
+    create table payments (
+        payment_id varchar(20) not null,
+        amount decimal(38,2) not null,
+        approved_at datetime(6),
+        approved_by varchar(100),
+        bank_reference_number varchar(100),
+        created_at datetime(6) not null,
+        created_by varchar(100) not null,
+        expense_id varchar(20) not null,
+        invoice_id varchar(20) not null,
+        is_deleted bit,
+        payment_date datetime(6),
+        payment_method enum ('BANK_TRANSFER','CHEQUE'),
+        rejection_reason TEXT,
+        status enum ('COMPLETED','INITIATED','PENDING','REJECTED') not null,
+        updated_at datetime(6),
+        primary key (payment_id)
+    ) engine=InnoDB
+2026-04-30T17:30:45.337+05:30 DEBUG 28232 --- [finance-service] [restartedMain] [                                                 ] org.hibernate.SQL                        : 
+    alter table assigned_tasks 
+       drop index uq_pm_task_id_finance
+2026-04-30T17:30:45.350+05:30 DEBUG 28232 --- [finance-service] [restartedMain] [                                                 ] org.hibernate.SQL                        : 
+    alter table assigned_tasks 
+       add constraint uq_pm_task_id_finance unique (pm_task_id)
+2026-04-30T17:30:45.370+05:30 DEBUG 28232 --- [finance-service] [restartedMain] [                                                 ] org.hibernate.SQL                        : 
+    alter table budgets 
+       drop index uk_project_category_parent
+2026-04-30T17:30:45.374+05:30 DEBUG 28232 --- [finance-service] [restartedMain] [                                                 ] org.hibernate.SQL                        : 
+    alter table budgets 
+       add constraint uk_project_category_parent unique (project_id, budget_category, parent_budget_id)
+2026-04-30T17:30:45.377+05:30 DEBUG 28232 --- [finance-service] [restartedMain] [                                                 ] org.hibernate.SQL                        : 
+    alter table payments 
+       drop index uk_invoice_amount
+2026-04-30T17:30:45.381+05:30 DEBUG 28232 --- [finance-service] [restartedMain] [                                                 ] org.hibernate.SQL                        : 
+    alter table payments 
+       add constraint uk_invoice_amount unique (invoice_id, amount)
+2026-04-30T17:30:45.404+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2026-04-30T17:30:45.637+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] c.b.finance.config.Resilience4jConfig    : Resilience4j configuration initialized
+2026-04-30T17:30:45.968+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2026-04-30T17:30:46.548+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.c.openfeign.FeignClientFactoryBean   : For 'project-service' URL not provided. Will try picking an instance via load-balancing.
+2026-04-30T17:30:50.077+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.c.openfeign.FeignClientFactoryBean   : For 'project-service' URL not provided. Will try picking an instance via load-balancing.
+2026-04-30T17:30:52.836+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.c.openfeign.FeignClientFactoryBean   : For 'vendor-service' URL not provided. Will try picking an instance via load-balancing.
+2026-04-30T17:30:58.770+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name customUserDetailsService
+2026-04-30T17:31:03.412+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] DiscoveryClientOptionalArgsConfiguration : Eureka HTTP Client uses RestClient.
+2026-04-30T17:31:03.639+05:30  WARN 28232 --- [finance-service] [restartedMain] [                                                 ] iguration$LoadBalancerCaffeineWarnLogger : Spring Cloud LoadBalancer is currently working with the default cache. While this cache implementation is useful for development and tests, it's recommended to use Caffeine cache in production.You can switch to using Caffeine cache, by adding it and org.springframework.cache.caffeine.CaffeineCacheManager to the classpath.
+2026-04-30T17:31:03.675+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.b.a.e.web.EndpointLinksResolver      : Exposing 2 endpoints beneath base path '/actuator'
+2026-04-30T17:31:03.873+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.c.n.eureka.InstanceInfoFactory       : Setting initial instance status as: STARTING
+2026-04-30T17:31:03.960+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.netflix.discovery.DiscoveryClient    : Initializing Eureka in region us-east-1
+2026-04-30T17:31:03.988+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-04-30T17:31:04.010+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.netflix.discovery.DiscoveryClient    : Disable delta property : false
+2026-04-30T17:31:04.011+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.netflix.discovery.DiscoveryClient    : Single vip registry refresh property : null
+2026-04-30T17:31:04.011+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.netflix.discovery.DiscoveryClient    : Force full registry fetch : false
+2026-04-30T17:31:04.011+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.netflix.discovery.DiscoveryClient    : Application is null : false
+2026-04-30T17:31:04.011+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.netflix.discovery.DiscoveryClient    : Registered Applications size is zero : true
+2026-04-30T17:31:04.011+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.netflix.discovery.DiscoveryClient    : Application version is -1: true
+2026-04-30T17:31:04.011+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.netflix.discovery.DiscoveryClient    : Getting all instance registry info from the eureka server
+2026-04-30T17:31:04.742+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.netflix.discovery.DiscoveryClient    : The response status is 200
+2026-04-30T17:31:04.746+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.netflix.discovery.DiscoveryClient    : Starting heartbeat executor: renew interval is: 30
+2026-04-30T17:31:04.750+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] c.n.discovery.InstanceInfoReplicator     : InstanceInfoReplicator onDemand update allowed rate per min is 4
+2026-04-30T17:31:04.753+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.netflix.discovery.DiscoveryClient    : Discovery Client initialized at timestamp 1777550464752 with initial instances count: 7
+2026-04-30T17:31:04.781+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.c.n.e.s.EurekaServiceRegistry        : Registering application FINANCE-SERVICE with eureka with status UP
+2026-04-30T17:31:04.783+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] com.netflix.discovery.DiscoveryClient    : Saw local status change event StatusChangeEvent [timestamp=1777550464783, current=UP, previous=STARTING]
+2026-04-30T17:31:04.786+05:30  INFO 28232 --- [finance-service] [DiscoveryClient-InstanceInfoReplicator-%d] [                                                 ] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_FINANCE-SERVICE/finance-service:8085: registering service...
+2026-04-30T17:31:04.810+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8085 (http) with context path '/'
+2026-04-30T17:31:04.811+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] .s.c.n.e.s.EurekaAutoServiceRegistration : Updating port to 8085
+2026-04-30T17:31:04.865+05:30  INFO 28232 --- [finance-service] [DiscoveryClient-InstanceInfoReplicator-%d] [                                                 ] com.netflix.discovery.DiscoveryClient    : DiscoveryClient_FINANCE-SERVICE/finance-service:8085 - registration status: 204
+2026-04-30T17:31:04.872+05:30  INFO 28232 --- [finance-service] [restartedMain] [                                                 ] c.buildsmart.finance.FinanceApplication  : Started FinanceApplication in 33.058 seconds (process running for 34.905)
+2026-04-30T17:31:05.105+05:30  WARN 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.core.events.SpringDocAppInitializer  : SpringDoc /v3/api-docs endpoint is enabled by default. To disable it in production, set the property 'springdoc.api-docs.enabled=false'
+2026-04-30T17:31:05.106+05:30  WARN 28232 --- [finance-service] [restartedMain] [                                                 ] o.s.core.events.SpringDocAppInitializer  : SpringDoc /swagger-ui.html endpoint is enabled by default. To disable it in production, set the property 'springdoc.swagger-ui.enabled=false'
+2026-04-30T17:31:05.808+05:30  WARN 28232 --- [finance-service] [AsyncReporter{ZipkinHttpClientSender{http://localhost:9411/api/v2/spans}}] [                                                 ] z.r.i.AsyncReporter$BoundedAsyncReporter : Spans were dropped due to exceptions. All subsequent errors will be logged at FINE level.
+2026-04-30T17:31:05.809+05:30  WARN 28232 --- [finance-service] [AsyncReporter{ZipkinHttpClientSender{http://localhost:9411/api/v2/spans}}] [                                                 ] z.r.i.AsyncReporter$BoundedAsyncReporter : Dropped 2 spans due to ConnectException()
+
+java.net.ConnectException
+	at java.net.http/jdk.internal.net.http.HttpClientImpl.send(HttpClientImpl.java:951) ~[java.net.http:na]
+	at java.net.http/jdk.internal.net.http.HttpClientFacade.send(HttpClientFacade.java:133) ~[java.net.http:na]
+	at org.springframework.boot.zipkin.autoconfigure.ZipkinHttpClientSender.postSpans(ZipkinHttpClientSender.java:59) ~[spring-boot-zipkin-4.0.5.jar:4.0.5]
+	at org.springframework.boot.zipkin.autoconfigure.HttpSender.postSpans(HttpSender.java:69) ~[spring-boot-zipkin-4.0.5.jar:4.0.5]
+	at org.springframework.boot.zipkin.autoconfigure.HttpSender.postSpans(HttpSender.java:41) ~[spring-boot-zipkin-4.0.5.jar:4.0.5]
+	at zipkin2.reporter.BaseHttpSender.send(BaseHttpSender.java:123) ~[zipkin-reporter-3.5.3.jar:na]
+	at zipkin2.reporter.internal.AsyncReporter$BoundedAsyncReporter.flush(AsyncReporter.java:266) ~[zipkin-reporter-3.5.3.jar:na]
+	at zipkin2.reporter.internal.AsyncReporter$Flusher.run(AsyncReporter.java:352) ~[zipkin-reporter-3.5.3.jar:na]
+	at java.base/java.lang.Thread.run(Thread.java:1583) ~[na:na]
+Caused by: java.net.ConnectException
+	at java.net.http/jdk.internal.net.http.common.Utils.toConnectException(Utils.java:1028) ~[java.net.http:na]
+	at java.net.http/jdk.internal.net.http.PlainHttpConnection.connectAsync(PlainHttpConnection.java:227) ~[java.net.http:na]
+	at java.net.http/jdk.internal.net.http.PlainHttpConnection.checkRetryConnect(PlainHttpConnection.java:280) ~[java.net.http:na]
+	at java.net.http/jdk.internal.net.http.PlainHttpConnection.lambda$connectAsync$2(PlainHttpConnection.java:238) ~[java.net.http:na]
+	at java.base/java.util.concurrent.CompletableFuture.uniHandle(CompletableFuture.java:934) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture$UniHandle.tryFire(CompletableFuture.java:911) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture.postComplete(CompletableFuture.java:510) ~[na:na]
+	at java.base/java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1773) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1144) ~[na:na]
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:642) ~[na:na]
+	... 1 common frames omitted
+Caused by: java.nio.channels.ClosedChannelException
+	at java.base/sun.nio.ch.SocketChannelImpl.ensureOpen(SocketChannelImpl.java:202) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.beginConnect(SocketChannelImpl.java:786) ~[na:na]
+	at java.base/sun.nio.ch.SocketChannelImpl.connect(SocketChannelImpl.java:874) ~[na:na]
+	at java.net.http/jdk.internal.net.http.PlainHttpConnection.lambda$connectAsync$1(PlainHttpConnection.java:210) ~[java.net.http:na]
+	at java.base/java.security.AccessController.doPrivileged(AccessController.java:571) ~[na:na]
+	at java.net.http/jdk.internal.net.http.PlainHttpConnection.connectAsync(PlainHttpConnection.java:212) ~[java.net.http:na]
+	... 9 common frames omitted
+
+2026-04-30T17:36:04.020+05:30  INFO 28232 --- [finance-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-04-30T17:41:04.029+05:30  INFO 28232 --- [finance-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-04-30T17:46:04.035+05:30  INFO 28232 --- [finance-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-04-30T17:51:04.050+05:30  INFO 28232 --- [finance-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-04-30T17:56:04.056+05:30  INFO 28232 --- [finance-service] [AsyncResolver-bootstrap-executor-%d] [                                                 ] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
