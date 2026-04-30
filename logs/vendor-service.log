@@ -67,3 +67,7 @@ This generated password is for development use only. Your security configuration
 2026-04-30T18:02:27.900+05:30  INFO [vendor-service,,] 15320 --- [vendor-service] [AsyncResolver-bootstrap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
 2026-04-30T18:07:27.905+05:30  INFO [vendor-service,,] 15320 --- [vendor-service] [AsyncResolver-bootstrap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
 2026-04-30T18:12:27.917+05:30  INFO [vendor-service,,] 15320 --- [vendor-service] [AsyncResolver-bootstrap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-04-30T18:17:27.926+05:30  INFO [vendor-service,,] 15320 --- [vendor-service] [AsyncResolver-bootstrap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-04-30T18:22:27.946+05:30  INFO [vendor-service,,] 15320 --- [vendor-service] [AsyncResolver-bootstrap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-04-30T18:27:27.955+05:30  INFO [vendor-service,,] 15320 --- [vendor-service] [AsyncResolver-bootstrap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration
+2026-04-30T18:32:27.976+05:30  INFO [vendor-service,,] 15320 --- [vendor-service] [AsyncResolver-bootstrap-executor-%d] c.n.d.s.r.aws.ConfigClusterResolver      : Resolving eureka endpoints via configuration

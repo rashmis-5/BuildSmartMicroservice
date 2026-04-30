@@ -17,6 +17,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="iam-service" />
+        <module name="api-gateway" />
         <module name="safety-service" />
         <module name="report-analytics" />
         <module name="notification-service" />
@@ -46,6 +47,7 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="api-gateway" options="-parameters" />
       <module name="finance" options="-parameters" />
       <module name="iam-service" options="-parameters" />
       <module name="notification-service" options="-parameters" />

@@ -13,6 +13,7 @@
         <option value="$PROJECT_DIR$/resource-allocation/resource-allocation/pom.xml" />
         <option value="$PROJECT_DIR$/notification-service/pom.xml" />
         <option value="$PROJECT_DIR$/vendor-contract-management-master/pom.xml" />
+        <option value="$PROJECT_DIR$/buildsmart-iam-Api-gateway/pom.xml" />
       </list>
     </option>
   </component>
